@@ -1,0 +1,416 @@
+{
+  "tables": [
+    {
+      "schema": "",
+      "table": "Clients",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "user_id",
+          "type": "int"
+        },
+        {
+          "name": "name",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "email",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "phone",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "last_contacted",
+          "type": "DATE"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "",
+      "table": "Finances",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "transaction_date",
+          "type": "DATE"
+        },
+        {
+          "name": "amount",
+          "type": "DECIMAL(10, 2)"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "",
+      "table": "Inventory",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "item_name",
+          "type": "unknown"
+        },
+        {
+          "name": "quantity",
+          "type": "int"
+        },
+        {
+          "name": "alert_quantity",
+          "type": "int"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "",
+      "table": "Notifications",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "client_id",
+          "type": "int"
+        },
+        {
+          "name": "message",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "sent_date",
+          "type": "DATE"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "",
+      "table": "Orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "client_id",
+          "type": "int"
+        },
+        {
+          "name": "order_date",
+          "type": "DATE"
+        },
+        {
+          "name": "status",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "total_amount",
+          "type": "varchar(255)"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "",
+      "table": "Users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "username",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "password",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "role",
+          "type": "int"
+        }
+      ],
+      "primaryKey": {
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "public",
+      "table": "credentials",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "int"
+        },
+        {
+          "name": "login",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "password",
+          "type": "varchar(255)"
+        }
+      ],
+      "uniques": [
+        {
+          "name": "credentials_login_uniq",
+          "columns": [
+            "login"
+          ],
+          "definition": "(login)"
+        }
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "role_user",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "role_id",
+          "type": "int"
+        },
+        {
+          "name": "user_id",
+          "type": "int"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp"
+        }
+      ],
+      "primaryKey": {
+        "name": "role_user_pk",
+        "columns": [
+          "id"
+        ]
+      }
+    },
+    {
+      "schema": "public",
+      "table": "roles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "slug",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "name",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp"
+        }
+      ],
+      "primaryKey": {
+        "name": "roles_pk",
+        "columns": [
+          "id"
+        ]
+      },
+      "uniques": [
+        {
+          "name": "roles_slug_uniq",
+          "columns": [
+            "slug"
+          ],
+          "definition": "(slug)"
+        },
+        {
+          "name": "roles_name_uniq",
+          "columns": [
+            "name"
+          ],
+          "definition": "(name)"
+        }
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "comment": "The user id which is automatically defined based on subscription order. Should never change!"
+        },
+        {
+          "name": "first_name",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "last_name",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "email",
+          "type": "varchar(255)",
+          "nullable": true
+        },
+        {
+          "name": "external_id",
+          "type": "uuid",
+          "nullable": true
+        }
+      ],
+      "primaryKey": {
+        "name": "users_pk",
+        "columns": [
+          "id"
+        ]
+      },
+      "uniques": [
+        {
+          "name": "user_email_uniq",
+          "columns": [
+            "email"
+          ],
+          "definition": "(email)"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "user_name_index",
+          "columns": [
+            "first_name",
+            "last_name"
+          ],
+          "definition": "USING btree (first_name, last_name)"
+        },
+        {
+          "name": "user_external_id_index",
+          "columns": [
+            "external_id"
+          ],
+          "definition": "(external_id)"
+        }
+      ],
+      "comment": "A table to store all users and in a single diagram control them, for the better or worse!"
+    }
+  ],
+  "relations": [
+    {
+      "name": "credentials_user_id_fk",
+      "src": {
+        "table": "public.credentials",
+        "column": "user_id"
+      },
+      "ref": {
+        "table": "public.users",
+        "column": "id"
+      }
+    },
+    {
+      "name": "role_user_role_id_fk",
+      "src": {
+        "table": "public.role_user",
+        "column": "role_id"
+      },
+      "ref": {
+        "table": "public.roles",
+        "column": "id"
+      }
+    },
+    {
+      "name": "role_user_user_id_fk",
+      "src": {
+        "table": "public.role_user",
+        "column": "user_id"
+      },
+      "ref": {
+        "table": "public.users",
+        "column": "id"
+      }
+    },
+    {
+      "name": "virtual relation",
+      "src": {
+        "table": ".Notifications",
+        "column": "client_id"
+      },
+      "ref": {
+        "table": ".Clients",
+        "column": "id"
+      }
+    },
+    {
+      "name": "virtual relation",
+      "src": {
+        "table": ".Orders",
+        "column": "client_id"
+      },
+      "ref": {
+        "table": ".Clients",
+        "column": "id"
+      }
+    },
+    {
+      "name": "virtual relation",
+      "src": {
+        "table": ".Clients",
+        "column": "user_id"
+      },
+      "ref": {
+        "table": ".Users",
+        "column": "id"
+      }
+    }
+  ]
+}
